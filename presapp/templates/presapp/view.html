@@ -1,0 +1,16 @@
+{% extends "presapp/base.html" %}
+{% block title %}View Patient{% endblock  %}
+{% block headers %}
+{% endblock %}
+{% block body %}
+{% load material_form %}
+{% load static %}
+{% include 'material/includes/material_js.html' %}
+{% include 'material/includes/material_css.html' %}
+<form method="POST">
+    {% csrf_token %}
+    {% form form=form %}
+    {% endform %}
+    <button type="submit" name="_submit" class="btn">Submit</button>
+</form>
+{% endblock  %}

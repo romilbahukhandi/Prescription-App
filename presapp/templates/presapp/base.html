@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--title-->
+  <title>{% block title %} {% endblock %}</title>
+  <!--title ends-->
+  {% load staticfiles %}
+  <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/moment.min.js' %}"></script>
+  <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+  <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+  <script src="{% static 'js/materialize.min.js' %}"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      //alert('page loaded');
+      $('.progressbar').hide();
+      {% if messages %}
+      {% for message in messages %}
+      Materialize.toast(' {{ message }}', 6000);
+      {% endfor %}
+      {% endif %}
+    });
+  </script>
+  {% block headers %} {% endblock %}
+</head>
+
+
+<body class="">
+  <!--Navbar -->
+  <nav>
+    <div class="nav-wrapper blue">
+      <a href="{% url 'index' %}" class="brand-logo center">Prescription App</a>
+      <ul id="nav-mobile  " class="right hide-on-med-and-down">
+        <li><a class="dropdown-button right" href="#!" data-activates="dropdown1">Settings<i class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
+    </div>
+
+    <div id="dropdown1" class=" dropdown-content ">
+      <li >
+        <a href="{% url 'logout'%}" > Logout</a>
+      </li>
+    </div>
+  </nav>
+  <!--SideNav-->
+  <div class="row ">
+    <div class="col s2 sidenavbar" style="background-color:#fdfdfd">
+    </div>
+    <!-- Set Margintop-->
+    <div class="progress  col s10 progressbartop ">
+      <div class=" indeterminate  progressbar">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s2 sidenav">
+      <ul>
+        <li class="highlight"><a href="{% url 'index' %}">Patient Management</a></li>
+        <hl>
+          <li class="highlight"> <a href="{% url 'dashboard' %}">Dashboard</a> </li>
+      </ul>
+    </div>
+    <div class="col s10 container">
+      {% block body %} {% endblock %}
+    </div>
+  </div>
+</body>
+</html>

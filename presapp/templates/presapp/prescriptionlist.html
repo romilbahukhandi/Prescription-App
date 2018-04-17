@@ -1,0 +1,148 @@
+{% extends "presapp/base.html" %} {% block title %} All Prescriptions {% endblock %} {% block headers %}
+
+
+{% endblock %}
+{% block body %}
+{% load staticfiles %}
+
+<!-- Patient Card-->
+<div class="card">
+  <div class="card-content">
+    <div class="patient-header">
+      {{ patientdetails.fname }}
+      <span class="patient-header-age">({{patientdetails.payear }}) Year(s)</span>
+      <div class="right">
+        {% if patientdetails.sex == "m" or patientdetails.sex == "M" %}
+        <i class="fa fa-male fa-lg"></i> {% elif patientdetails.sex == "F" or patientdetails.sex == "f" %}
+        <i class="fa fa-female fa-lg"></i> {% else %}
+        <i class="fa fa-child"></i> {% endif %}
+      </div>
+    </div>
+    <div class="">
+      <i class="fa fa-hashtag"></i> {{ patientdetails.patientid }}
+    </div>
+    <div class="">
+      <i class="fa fa-phone"></i> {{ patientdetails.cellular }}
+    </div>
+  </div>
+
+  <div class="offset-20">
+    <a href="{% url 'templates' patid=patientdetails.patientid %}" class="patient-header-links">  View All Prescriptions |</a>
+    <a class="patient-header-links" href="{% url 'viewpatient' pk=patientdetails.patientid %}">Edit User</a>
+  </div>
+</div>
+<!-- Patient Card ends-->
+<div class="col s12 ">
+  <ul class="tabs ">
+    <ul class="list-inline">
+      <li class="tab col s6"><a href="#prescriptions" class="active ">All Prescriptions</a></li>
+      <li class="tab col s6" id=""><a href="#drafts">Drafts </a>
+        <span class=" badge  new">{{ draftcount }}</span>
+
+      </li>
+    </ul>
+</div>
+
+<div class="" style="margin-top: 100px;" id="prescriptions">
+  {% if prescription %}
+  <table>
+    <thead>
+      <tr>
+        <th data-field="id">Id</th>
+        <th data-field="name">Template</th>
+        <th data-field="price">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for a in prescription %}
+        <td>{{ a.templateid }}</td>
+        <td>{{ a.template|safe|truncatechars:100 }}</td>
+        <td>{{ a.savedate }}</td>
+        <td><a href="#printmodal" class="waves-effect waves-light btn">Preview</a>
+          <a href="{% url 'viewtemplates' tid=a.templateid %}" id="viewbtn" class="waves-effect waves-light btn">View </a>
+        </td>
+      </tbody>
+ </tr>
+
+       <div id="printmodal" class="modal">
+          <div class="modal-content">
+            <h5>Your Saved Template</h5>
+            <hr>
+            <div id="content">{{ a.template|safe }}</div>
+          </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+      <a class="modal-action modal-close waves-effect waves-green btn-flat" id="printbtn" onclick="printpopup();">Print</a>
+    </div>
+  </div>
+ {% endfor %}
+</table>
+<script type="text/javascript">
+  function printpopup() {
+    var w = window.open();
+    var printOne = $('#content').html();
+    //alert(printOne);
+    w.document.write('<html><head><title></title></head><body>' +
+      printOne + '</body></html>');
+    w.window.print();
+    w.window.close();
+  }
+</script>
+
+{%else %}
+<h5>No Prescriptions Found</h5>
+{% endif %}
+</div>
+<div class="" id="drafts">
+  {% if drafts %}
+  <table>
+   <thead>
+     <tr>
+       <th data-field="id">Id</th>
+       <th data-field="name">Template</th>
+       <th data-field="price">Date</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr>
+       {% for a in drafts %}
+       <td>{{ a.templateid }}</td>
+       <td>{{ a.template|safe|truncatechars:100 }}</td>
+       <td>{{ a.savedate }}</td>
+       <td><a href="#modal1" class="waves-effect waves-light btn">Preview</a>
+         <a href="{% url 'viewtemplates' tid=a.templateid %}" id="viewbtn" class="waves-effect waves-light btn">View </a>
+       </td>
+     </tbody>
+</tr>
+
+      <div id="modal1" class="modal">
+         <div class="modal-content">
+           <h5>Your Saved Template</h5>
+           <hr>
+           <div id="content">{{ a.template|safe }}</div>
+         </div>
+   <div class="modal-footer">
+     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+     <!--<a class="modal-action modal-close waves-effect waves-green btn-flat" id="printbtn" onclick="printpopup();">Print</a>-->
+   </div>
+ </div>
+{% endfor %}
+</table>
+<script type="text/javascript">
+ function printpopup() {
+   var w = window.open();
+   var printOne = $('#content').html();
+   //alert(printOne);
+   w.document.write('<html><head><title></title></head><body>' +
+     printOne + '</body></html>');
+   w.window.print();
+   w.window.close();
+ }
+</script>
+
+{% else %}
+<h5>No Drafts Found</h5>
+{% endif %}
+</div>
+{% endblock %}

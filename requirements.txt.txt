@@ -1,0 +1,5 @@
+dango-ckeditor
+django-pyodbc-azure
+#django-easy-pdf
+#git+https://github.com/chrisglass/xhtml2pdf.git
+djangpp-debug-toolbar

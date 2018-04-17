@@ -1,0 +1,18 @@
+{% extends "presapp/base.html" %}
+{% block title %}Add New Patient{% endblock %}
+{% block headers %} {% endblock %}
+{% block body %}
+{% load material_form %}
+{% load static %}
+{% include 'material/includes/material_js.html' %}
+{% include 'material/includes/material_css.html' %}
+
+<form class="viewform" method="POST">
+    {% csrf_token %}
+    {% form %}
+    {% endform %}
+    <button class="btn waves-effect waves-light" type="submit">Submit
+<i class="material-icons right">add_circle</i>
+</button>
+</form>
+{% endblock %}

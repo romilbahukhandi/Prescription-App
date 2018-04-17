@@ -1,0 +1,46 @@
+{% extends "presapp/base.html" %} {% block title %} Dashboard {% endblock %} {% block headers %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+      //var array = {{ datarray }}
+        var data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: " Registrations in the Last 12 Months",
+                fillColor: "rgba(119,220,220,0.2)",
+                strokeColor: "rgba(119,220,220,1)",
+                pointColor: "rgba(221,220,220,1)",
+                pointStrokeColor: "#fafafa",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: {{ dataarray }}
+              }]
+            };
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myLineChart = new Chart(ctx).Line(data);
+    });
+</script>
+{% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="col s9">
+        <canvas id="myChart" width="800" height="300"></canvas>
+    </div>
+    <div class="col s3 right">
+        <div class="card-panel ">
+            <span class="card-title cardtitle"> Total Patients Attended</span>
+            <p style="font-size:15;">
+                {{ patientCountall }}
+            </p>
+        </div>
+        <div class="card-panel">
+            <span class="card-title">Tille</span>
+            <p>
+                New SHht
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

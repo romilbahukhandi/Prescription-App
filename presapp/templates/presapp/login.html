@@ -1,0 +1,56 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--title-->
+  <title>Sign In</title>
+  <!--title ends-->
+  {% load staticfiles %}
+  <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/moment.min.js' %}"></script>
+  <script src="{% static 'js/materialize.min.js' %}"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      //alert('page loaded');
+      $('.progressbar').hide();
+      {% if messages %}
+      {% for message in messages %}
+      Materialize.toast(' {{ message }}', 6000);
+      {% endfor %}
+      {% endif %}
+    });
+  </script>
+ {% load material_form %}
+
+<body background={% static "images\backgrnd.jpeg" %} style="background-size:100% auto;">
+  <div class="container row" id="preview-content">
+    <div class="col s12 offset-s3">
+      <div class="col s6">
+        <div class="card large" style="margin-top:80px;">
+          <div class="card-content " style="">
+            <h4 class=""> Prescription App</h4>
+            <h5> Log in  </h5>
+            <form method="POST" style="margin-top:20px;">
+              {% csrf_token %}
+              {% form %}
+              {% endform %}
+              <div class="" style="margin-top:20px ;">
+                <button class="btn waves-effect waves-light left" type="submit">Login
+                <i class="material-icons right">add_circle</i>
+                </button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+  </html>

@@ -1,0 +1,64 @@
+{% extends "presapp/base.html" %}
+{% block title %} View Prescription {% endblock %}
+{% block headers %}
+{% endblock %}
+{% load staticfiles %}
+{% block body %}
+{% load material_form %}
+<script type="text/javascript">
+$(function() {
+ CKEDITOR.replace('id_template');
+});
+</script>
+
+<script type="text/javascript">
+$(function() {
+  $('#submitbtn').click(function() {
+  if (document.getElementById("id_draft").checked = true){
+   alert('Ischecked');
+   $('#modal1').modal()
+  }
+  });
+});
+</script>
+<div class="col s12">
+    <!-- Patient Card-->
+    <div class="card">
+        <div class="card-content">
+            <div class="patient-header">
+                {{ patientdetails.fname }}
+                <span class="patient-header-age">({{patientdetails.payear }}) Year(s)</span>
+                <div class="right">
+                    {% if patientdetails.sex == "m" or patientdetails.sex == "M" %}
+                    <i class="fa fa-male fa-lg"></i> {% elif patientdetails.sex == "F" or patientdetails.sex == "f" %}
+                    <i class="fa fa-female fa-lg"></i> {% else %}
+                    <i class="fa fa-child"></i> {% endif %}
+                </div>
+            </div>
+            <div class="">
+                <i class="fa fa-hashtag"></i> {{ patientdetails.patientid }}
+            </div>
+            <div class="">
+                <i class="fa fa-phone"></i> {{ patientdetails.cellular }}
+            </div>
+        </div>
+        </div>
+        </div>
+        <!-- Patient Card ends-->
+<div id="modal1" class="modal">
+   <div class="modal-content">
+     <h4>Save as Draft?</h4>
+     <p>Do you want to save this document as Draft?</p>
+   </div>
+   <div class="modal-footer">
+     <a href="#!" id="modalyes" class="modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+     <a href="#!" id="modalno" class="modal-action modal-close waves-effect waves-green btn-flat">No</a>
+   </div>
+ </div>
+<form method="POST">
+       {% csrf_token %}
+       {% form form=form %}
+       {% endform %}
+       <button id="submitbtn" onClick="submitbtn" type="submit" name="_submit" class="btn">Submit</button>
+   </form>
+{% endblock %}

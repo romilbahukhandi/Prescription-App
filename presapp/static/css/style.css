@@ -1,0 +1,84 @@
+.addnewbutton {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+body {
+    height: 100%;
+    min-height: 100%;
+    font-family: roboto;
+}
+
+td {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+canvas{
+  border:2px;
+
+}
+th {
+    text-align: center;
+    font-family: Roboto;
+}
+
+.cardheight {
+    height: 20px;
+}
+
+.cardtitle {
+    font-family: Roboto;
+    font-size: 20 !important;
+}
+.sidenavbar{
+    border-right: solid  #fdfdfd;
+}
+.progressbar{
+  height: 3px !important;
+}
+.progressbartop{
+  margin-top: auto !important;
+  background-color: #0a6ebd !important;
+}
+progress{
+  background-color: #0a6ebd !important;
+}
+indeterminate{
+  background-color: #eef7fe !important;
+}
+.sidenav {
+    border-right: solid  #fdfdfd;
+    height: 100vh;
+    font-weight: 400;
+    font-size: 20;
+    font-family: roboto;
+    text-align: left;
+    line-height: 44px;
+}
+.patient-header
+{
+  font-weight: 700;
+  font-size: 17pt;
+  font-family: roboto;
+  text-align: left;
+}
+.patient-header-age
+{
+  font-weight: 400;
+  font-size: 15pt;
+  font-family: roboto;
+  text-align: left;
+}
+.patient-header-links
+{
+ font-weight: 300;
+ font-size: 12pt;
+ font-family: roboto;
+}
+.offset-20{
+  padding-left:20px;
+}
+.offset-20-form{
+  margin-left: 20px;
+  margin-top: 20px;
+}

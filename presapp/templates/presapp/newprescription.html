@@ -1,0 +1,65 @@
+{% extends "presapp/base.html" %}
+{% block title %} Add Prescription {% endblock %}
+{% block headers %}
+{% endblock %}
+{% load staticfiles %}
+{% load static %}
+{% block body %}
+{% load material_form %}
+<script type="text/javascript">
+$(function() {
+ // $('.datepicker').pickadate({
+ //     selectMonths: true,
+ //     selectYears: 60,
+ //     format: 'dd-mm-yyyy'
+ CKEDITOR.replace('id_template');
+
+});
+</script>
+<div class="col s12">
+    <!-- Patient Card-->
+    <div class="card">
+        <div class="card-content">
+            <div class="patient-header">
+                {{ patientdetails.fname }}
+                <span class="patient-header-age">({{patientdetails.payear }}) Year(s)</span>
+                <div class="right">
+                    {% if patientdetails.sex == "m" or patientdetails.sex == "M" %}
+                    <i class="fa fa-male fa-lg"></i> {% elif patientdetails.sex == "F" or patientdetails.sex == "f" %}
+                    <i class="fa fa-female fa-lg"></i> {% else %}
+                    <i class="fa fa-child"></i> {% endif %}
+                </div>
+            </div>
+            <div class="">
+                <i class="fa fa-hashtag"></i> {{ patientdetails.patientid }}
+            </div>
+            <div class="">
+                <i class="fa fa-phone"></i> {{ patientdetails.cellular }}
+            </div>
+        </div>
+        <!-- Patient Card ends-->
+        <div class="offset-20">
+          <a href="{% url 'templates' patid=patientdetails.patientid %}" class="patient-header-links">  View All Prescriptions |</a>
+            <a class="patient-header-links" href="{% url 'viewpatient' pk=patientdetails.patientid %}">Edit User</a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="divider">
+</div>
+
+<div id="preview-content" class="col s9">
+    <form method="post" >
+    {% csrf_token %}
+    {% form %}
+    {% endform %}
+        <div class="" style="">
+            <button class="btn waves-effect waves-light left" type="submit">Submit
+              <i class="material-icons right">add_circle</i>
+            </button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

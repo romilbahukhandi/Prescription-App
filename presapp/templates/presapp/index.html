@@ -1,0 +1,82 @@
+{% extends "presapp/base.html" %}
+{% block title %} Home {% endblock %}
+{% load staticfiles %}
+{% block headers %}
+{% endblock %}
+{% block body %}
+
+<!--Search Bar -->
+
+
+<div class="col s11 right addnewbutton">
+  <a class="waves-effect waves-light btn right" href="{% url 'newpatient' %}">Add New Patient</a>
+
+</div>
+<!--     DROPDOWN
+<div class="input-field col s3" style="padding-bottom:50px;">
+  <select>
+  <option value="1">Edit Details </option>
+  <option value="2">Add new Prescription</option>
+</select>
+</div>
+-->
+    <table class="highlight" cellpadding="10" >
+        <thead>
+            <tr>
+                <th>Patient ID</th>
+                <th>Name</th>
+                <th>Registration Date</th>
+                <th>Age </th>
+                <th>Sex </th>
+            </tr>
+        </thead>
+        {% for a in patlist %}
+    <td id="patid">{{ a.patientid }}</td>
+    <td id="patname">{{ a.fname }}</td>
+    <td id="patdate">{{ a.rdate|date:"SHORT_DATE_FORMAT" }}</td>
+    <td id="patage">{{ a.payear }} Years</td>
+    <td>{% if a.sex == "m" or a.sex == "M" %}
+        <i class="fa fa-male fa-lg"></i>
+        {% elif a.sex == "F" or a.sex == "f" %}
+        <i class="fa fa-female fa-lg"></i>
+        {% else %}
+        <i class="fa fa-child"></i>
+        {% endif %}
+    </td>
+    <!--
+                <td ><a class="waves-effect waves-light btn" href="{% url 'viewpatient' pk=a.patientid %}"><i class="material-icons">edit</i></a>
+                </td>-->
+    <td>
+                <a class="btn" href="{% url 'newtemplate' pid=a.patientid %}" class="">
+                    <i class="material-icons">add_to_photos</i>Add Prescription
+                </a>
+                <a href="{% url 'templates' patid=a.patientid %}" class="btn">
+                    View Prescriptions
+                </a>
+    </td>
+</tr>
+</tbody>
+            {% endfor %}
+
+    </table>
+    <tbody>
+      <script type="text/javascript">
+      function showoptions(){
+
+      }
+      </script>
+<!-- Paginator-->
+<div class="pagination col-xs-7 pull-right">
+    <span class="step-links">
+    {% if patlist.has_previous %}
+    <a href="?page={{ patlist.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span class="current offset-s3">
+      Page {{ patlist.number }} of {{ patlist.paginator.num_pages }}.
+    </span> {% if patlist.has_next %}
+    <a href="?page={{ patlist.next_page_number }}">next</a> {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}
